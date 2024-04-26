@@ -27,6 +27,13 @@ resource "azurerm_subnet" "my_terraform_subnet" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+resource "azurerm_public_ip" "my_terraform_public_ip" {
+  name                = "aseaudi-public-ip"
+  location            = "eastus"
+  resource_group_name = "RG_Simplex"
+  allocation_method   = "Dynamic"
+}
+
 resource "azurerm_network_interface" "my_terraform_nic" {
   name                = "aseaudi-nic"
   location            = "eastus"
