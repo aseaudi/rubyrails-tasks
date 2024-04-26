@@ -73,8 +73,5 @@ resource "azurerm_windows_virtual_machine" "main" {
 
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "myTFResourceGroup"
-  location = "eastus"
-}
+
 
