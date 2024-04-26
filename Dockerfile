@@ -1,7 +1,6 @@
-FROM ruby:2.7.6 
+FROM ruby:3.3.0
 WORKDIR /usr/src/app 
 COPY Gemfile Gemfile.lock ./ 
-RUN gem install bundler
 RUN bundle install 
 ADD . /usr/src/app/ 
 EXPOSE 3000 
