@@ -11,8 +11,8 @@ terraform {
 }
 
 provider "azurerm" {
+  use_oidc = true
   features {}
-  use_oidc        = true
 }
 
 resource "azurerm_resource_group" "rg" {
