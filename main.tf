@@ -50,7 +50,7 @@ resource "azurerm_network_interface" "my_terraform_nic" {
 resource "azurerm_windows_virtual_machine" "main" {
   name                  = "aseaudi-vm"
   admin_username        = "azureuser"
-  admin_password        = "pass"
+  admin_password        = "mju7KO)%tgGF"
   location              = "eastus"
   resource_group_name   = "RG_Simplex"
   network_interface_ids = [azurerm_network_interface.my_terraform_nic.id]
