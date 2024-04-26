@@ -44,8 +44,8 @@ jobs:
         uses: azure/login@v1
         with:
           client-id: 9c6ea0cb-02d3-4113-b1ac-206a139fdda6
-          tenant-id: 5a6bd267-db99-42f9-9969-8c87f91cbc21
-          subscription-id: c36672c6-f5ca-485e-8785-c76c3e6a1c35
+          tenant-id: c36672c6-f5ca-485e-8785-c76c3e6a1c35
+          subscription-id: be47504b-9e17-4bd8-80e7-605094704eab
       - name: Terraform Plan for prod
         run: |
           terraform init -backend-config="access_key=${{ secrets.STORAGE_ACCESS_KEY }}" -no-color
