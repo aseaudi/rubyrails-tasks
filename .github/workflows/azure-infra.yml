@@ -41,19 +41,19 @@ jobs:
       #   uses: hashicorp/setup-terraform@v1
       #   with:
       #     terraform_version: "1.5.7"
-  #     - name: Login to Azure
-  #       uses: azure/login@v1
-  #       with:
-  #         client-id: ${{ secrets.AZURE_CLIENT_ID }}
-  #         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-  #         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   #     # - name: Terraform Plan for prod
   #     #   run: |
   #     #     terraform init -backend-config="access_key=${{ secrets.STORAGE_ACCESS_KEY }}" -no-color
   #     #     terraform workspace select prod -no-color
   #     #     terraform plan -var access_key="${{ secrets.STORAGE_ACCESS_KEY }}" -var tenant_id="${{ secrets.AZURE_TENANT_ID }}" -var-file="prod/prod.tfvars" -no-color
-  #     - name: Terraform Plan for prod
-  #       run: terraform plan
+      - name: Terraform Plan for prod
+        run: terraform plan
 
   # prod-apply:
   #   needs: prod-plan
