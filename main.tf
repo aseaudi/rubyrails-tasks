@@ -120,7 +120,7 @@ resource "azurerm_private_endpoint" "example" {
   private_service_connection {
     name                           = "example-privateserviceconnection-key-vault"
     private_connection_resource_id = azurerm_key_vault.example.id
-    blob                           = "vault"
+    subresource_names              = "vault"
     is_manual_connection           = false
   }
 }
@@ -134,7 +134,7 @@ resource "azurerm_private_endpoint" "example2" {
   private_service_connection {
     name                           = "example-privateserviceconnection-linux-web-app"
     private_connection_resource_id = azurerm_linux_web_app.example.id
-    blob                           = "sites"
+    subresource_names              = "sites"
     is_manual_connection           = false
   }
 }
@@ -147,7 +147,7 @@ resource "azurerm_private_endpoint" "example3" {
   private_service_connection {
     name                           = "example-privateserviceconnection-postgresal-server"
     private_connection_resource_id = azurerm_postgresql_server.example.id
-    blob                           = "postgresqlServer"
+    subresource_names              = "postgresqlServer"
     is_manual_connection           = false
   }
 }
