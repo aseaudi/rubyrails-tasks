@@ -112,7 +112,7 @@ resource "azurerm_key_vault" "example" {
 }
 
 resource "azurerm_private_endpoint" "example" {
-  name                = "example-endpoint"
+  name                = "key-vault-endpoint-${random_pet.prefix.id}"
   location                    = "eastus"
   resource_group_name         = "RG_Simplex"
   subnet_id           = azurerm_subnet.example.id
@@ -126,7 +126,7 @@ resource "azurerm_private_endpoint" "example" {
 }
 
 resource "azurerm_private_endpoint" "example2" {
-  name                = "example-endpoint"
+  name                = "linux-web-app-endpoint-${random_pet.prefix.id}"
   location                    = "eastus"
   resource_group_name         = "RG_Simplex"
   subnet_id           = azurerm_subnet.example.id
@@ -139,7 +139,7 @@ resource "azurerm_private_endpoint" "example2" {
   }
 }
 resource "azurerm_private_endpoint" "example3" {
-  name                = "example-endpoint"
+  name                = "postgresal-server-endpoint-${random_pet.prefix.id}"
   location                    = "eastus"
   resource_group_name         = "RG_Simplex"
   subnet_id           = azurerm_subnet.example.id
@@ -153,12 +153,12 @@ resource "azurerm_private_endpoint" "example3" {
 }
 
 resource "azurerm_private_dns_zone" "example" {
-  name                = "mydomain2.com"
+  name                = "mydomain-${random_pet.prefix.id}.com"
   resource_group_name = "RG_Simplex"
 }
 
 resource "azurerm_private_dns_a_record" "example" {
-  name                = "test2"
+  name                = "test-${random_pet.prefix.id}"
   zone_name           = azurerm_private_dns_zone.example.name
   resource_group_name = "RG_Simplex"
   ttl                 = 300
