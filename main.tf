@@ -26,14 +26,14 @@ resource "azurerm_virtual_network" "my_terraform_network" {
 
 # Create subnet
 resource "azurerm_subnet" "my_terraform_subnet" {
-  name                 = "${random_pet.prefix.id}-subnet"
+  name                 = "subnet-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   virtual_network_name = azurerm_virtual_network.my_terraform_network.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_postgresql_server" "example" {
-  name                = "${random_pet.prefix.id}-postgresql-server"
+  name                = "postgres-${random_pet.prefix.id}"
   location            = "eastus"
   resource_group_name = "RG_Simplex"
 
@@ -64,7 +64,7 @@ resource "azurerm_postgresql_database" "example" {
 }
 
 resource "azurerm_service_plan" "example" {
-  name                = "${random_pet.prefix.id}-example"
+  name                = "aseaudi-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   location            = "eastus"
   os_type             = "Linux"
@@ -72,7 +72,7 @@ resource "azurerm_service_plan" "example" {
 }
 
 resource "azurerm_linux_web_app" "example" {
-  name                = "${random_pet.prefix.id}-example"
+  name                = "aseaudi-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   location            = "eastus"
   service_plan_id     = azurerm_service_plan.example.id
@@ -83,7 +83,7 @@ resource "azurerm_linux_web_app" "example" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "example" {
-  name                        = "${random_pet.prefix.id}-examplekeyvault"
+  name                        = "keyvault-${random_pet.prefix.id}"
   location                    = "eastus"
   resource_group_name         = "RG_Simplex"
   enabled_for_disk_encryption = true
@@ -111,12 +111,12 @@ resource "azurerm_key_vault" "example" {
   }
 }
 
-resource "azurerm_private_dns_zone" "${random_pet.prefix.id}-example" {
+resource "azurerm_private_dns_zone" "dns-${random_pet.prefix.id}" {
   name                = "mydomain.com"
   resource_group_name = "RG_Simplex"
 }
 
-resource "azurerm_private_dns_a_record" "${random_pet.prefix.id}-example" {
+resource "azurerm_private_dns_a_record" "dns-a-record-${random_pet.prefix.id}" {
   name                = "test"
   zone_name           = azurerm_private_dns_zone.example.name
   resource_group_name = "RG_Simplex"
