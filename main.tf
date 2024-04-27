@@ -123,16 +123,34 @@ resource "azurerm_private_endpoint" "example" {
     subresource_names              = ["blob"]
     is_manual_connection           = false
   }
+}
+
+resource "azurerm_private_endpoint" "example2" {
+  name                = "example-endpoint"
+  location                    = "eastus"
+  resource_group_name         = "RG_Simplex"
+  subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
     name                           = "example-privateserviceconnection-web-app"
-    private_connection_resource_id = azurerm_linux_web_app.example.id
+    private_connection_resource_id = azurerm_web_app.example.id
     subresource_names              = ["blob"]
     is_manual_connection           = false
   }
-
 }
+resource "azurerm_private_endpoint" "example3" {
+  name                = "example-endpoint"
+  location                    = "eastus"
+  resource_group_name         = "RG_Simplex"
+  subnet_id           = azurerm_subnet.example.id
 
+  private_service_connection {
+    name                           = "example-privateserviceconnection-postgresal-server"
+    private_connection_resource_id = azurerm_postgresql_server.example.id
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+  }
+}
 
 resource "azurerm_private_dns_zone" "example" {
   name                = "mydomain2.com"
