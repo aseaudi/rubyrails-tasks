@@ -132,8 +132,8 @@ resource "azurerm_private_endpoint" "example2" {
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
-    name                           = "example-privateserviceconnection-web-app"
-    private_connection_resource_id = azurerm_web_app.example.id
+    name                           = "example-privateserviceconnection-linux-web-app"
+    private_connection_resource_id = azurerm_linux_web_app.example.id
     subresource_names              = ["blob"]
     is_manual_connection           = false
   }
