@@ -7,7 +7,7 @@ on:
   #   paths-ignore:
   #     - README.md
   workflow_run:
-    workflows: [Build and deploy container app to Azure Web App - ruby-github-actions]
+    workflows: [Build image]
     types:
       - completed
   workflow_dispatch:
