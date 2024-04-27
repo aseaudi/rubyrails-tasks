@@ -14,6 +14,8 @@ provider "azurerm" {
   features {}
 }
 
+resource "random" "prefix" {}
+
 # Create virtual network
 resource "azurerm_virtual_network" "my_terraform_network" {
   name                = "${random_pet.prefix.id}-vnet"
