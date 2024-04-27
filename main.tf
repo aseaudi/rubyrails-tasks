@@ -14,6 +14,11 @@ provider "azurerm" {
   features {}
 }
 
+variable "docker_registry" {}
+variable "docker_username" {}
+variable "docker_password" {}
+variable "docker_image" {}
+
 resource "random_pet" "prefix" {}
 
 # Create virtual network
@@ -100,7 +105,15 @@ resource "azurerm_linux_web_app" "example" {
   location            = "eastus"
   service_plan_id     = azurerm_service_plan.example.id
 
-  site_config {}
+  
+  site_config {
+    application_stack {
+      docker_image_name = "${var.docker_image}"
+      docker_registry_url = "${var.docker_registry}"
+      docker_registry_username = "${var.docker_username}"
+      docker_registry_password = "${var.docker_password}"
+  }
+  }
 }
 
 data "azurerm_client_config" "current" {}
