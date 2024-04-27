@@ -33,6 +33,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       - name: Terraform Plan for prod
+        env:
+          TF_VAR_docker_registry: https://aseaudi.azurecr.io/
+          TF_VAR_docker_username: ${{ secrets.AzureAppService_ContainerUsername_3b48a09588d34b2aa06c18b651dee1be }}
+          TF_VAR_docker_password: ${{ secrets.AzureAppService_ContainerPassword_41be41b1df284be6ad4a33b172205d85 }}
+          TF_VAR_docker_image: 'aseaudi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_3b48a09588d34b2aa06c18b651dee1be }}/ruby-dev:${{ github.sha }}'      
         run: terraform plan
       - name: Terraform Apply for prod
         env:
