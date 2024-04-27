@@ -13,7 +13,7 @@ permissions:
   contents: read
   
 jobs:
-  validate:
+  deploy-infra:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
