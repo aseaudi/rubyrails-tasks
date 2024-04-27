@@ -111,12 +111,12 @@ resource "azurerm_key_vault" "example" {
   }
 }
 
-resource "azurerm_private_dns_zone" "aseaui-dns-1" {
+resource "azurerm_private_dns_zone" "example" {
   name                = "mydomain.com"
   resource_group_name = "RG_Simplex"
 }
 
-resource "azurerm_private_dns_a_record" "aseaudi-a-record-1" {
+resource "azurerm_private_dns_a_record" "example" {
   name                = "test"
   zone_name           = azurerm_private_dns_zone.example.name
   resource_group_name = "RG_Simplex"
