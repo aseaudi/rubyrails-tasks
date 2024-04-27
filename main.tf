@@ -18,7 +18,7 @@ resource "random_pet" "prefix" {}
 
 # Create virtual network
 resource "azurerm_virtual_network" "my_terraform_network" {
-  name                = "${random_pet.prefix.id}-vnet"
+  name                = "vnet-${random_pet.prefix.id}"
   address_space       = ["10.0.0.0/16"]
   location            = "eastus"
   resource_group_name = "RG_Simplex"
@@ -64,7 +64,7 @@ resource "azurerm_postgresql_database" "example" {
 }
 
 resource "azurerm_service_plan" "example" {
-  name                = "aseaudi-${random_pet.prefix.id}"
+  name                = "service-plan-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   location            = "eastus"
   os_type             = "Linux"
@@ -72,7 +72,7 @@ resource "azurerm_service_plan" "example" {
 }
 
 resource "azurerm_linux_web_app" "example" {
-  name                = "aseaudi-${random_pet.prefix.id}"
+  name                = "web-app-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   location            = "eastus"
   service_plan_id     = azurerm_service_plan.example.id
@@ -112,12 +112,12 @@ resource "azurerm_key_vault" "example" {
 }
 
 resource "azurerm_private_dns_zone" "example" {
-  name                = "mydomain.com"
+  name                = "mydomain2.com"
   resource_group_name = "RG_Simplex"
 }
 
 resource "azurerm_private_dns_a_record" "example" {
-  name                = "test"
+  name                = "test2"
   zone_name           = azurerm_private_dns_zone.example.name
   resource_group_name = "RG_Simplex"
   ttl                 = 300
