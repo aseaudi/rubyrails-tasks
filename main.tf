@@ -32,30 +32,53 @@ resource "azurerm_subnet" "example" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_postgresql_server" "example" {
-  name                = "postgres-${random_pet.prefix.id}"
-  location            = "eastus"
-  resource_group_name = "RG_Simplex"
+# resource "azurerm_postgresql_server" "example" {
+#   name                = "postgres-${random_pet.prefix.id}"
+#   location            = "eastus"
+#   resource_group_name = "RG_Simplex"
 
-  sku_name = "B_Gen5_2"
+#   sku_name = "B_Gen5_2"
 
-  storage_mb                   = 5120
-  backup_retention_days        = 7
-  geo_redundant_backup_enabled = false
-  auto_grow_enabled            = true
+#   storage_mb                   = 5120
+#   backup_retention_days        = 7
+#   geo_redundant_backup_enabled = false
+#   auto_grow_enabled            = true
 
-  administrator_login          = "psqladmin"
-  administrator_login_password = "H@Sh1CoR3!"
-  version                      = "9.5"
-  ssl_enforcement_enabled      = true
+#   administrator_login          = "psqladmin"
+#   administrator_login_password = "H@Sh1CoR3!"
+#   version                      = "9.5"
+#   ssl_enforcement_enabled      = true
+# }
+
+# resource "azurerm_postgresql_database" "example" {
+#   name                = "exampledb"
+#   resource_group_name = "RG_Simplex"
+#   server_name         = azurerm_postgresql_server.example.name
+#   charset             = "UTF8"
+#   collation           = "English_United States.1252"
+
+#   # prevent the possibility of accidental data loss
+#   lifecycle {
+#     prevent_destroy = true
+#   }
+# }
+
+resource "azurerm_postgresql_flexible_server" "example" {
+  name                   = "psqlflexibleserver-${random_pet.prefix.id}"
+  resource_group_name    = "RG_Simplex"
+  location               = "eastus"
+  version                = "12"
+  administrator_login    = "psqladmin"
+  administrator_password = "H@Sh1CoR3!"
+  storage_mb             = 32768
+  sku_name               = "GP_Standard_D4s_v3"
 }
 
-resource "azurerm_postgresql_database" "example" {
-  name                = "exampledb"
-  resource_group_name = "RG_Simplex"
-  server_name         = azurerm_postgresql_server.example.name
-  charset             = "UTF8"
-  collation           = "English_United States.1252"
+resource "azurerm_postgresql_flexible_server_database" "example" {
+  name      = "exampledb-${random_pet.prefix.id}"
+  server_id = azurerm_postgresql_flexible_server.example.id
+  collation = "en_US.utf8"
+  charset   = "utf8"
 
   # prevent the possibility of accidental data loss
   lifecycle {
