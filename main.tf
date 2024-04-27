@@ -17,7 +17,7 @@ provider "azurerm" {
 resource "random_pet" "prefix" {}
 
 # Create virtual network
-resource "azurerm_virtual_network" "my_terraform_network" {
+resource "azurerm_virtual_network" "example" {
   name                = "vnet-${random_pet.prefix.id}"
   address_space       = ["10.0.0.0/16"]
   location            = "eastus"
@@ -25,7 +25,7 @@ resource "azurerm_virtual_network" "my_terraform_network" {
 }
 
 # Create subnet
-resource "azurerm_subnet" "my_terraform_subnet" {
+resource "azurerm_subnet" "example" {
   name                 = "subnet-${random_pet.prefix.id}"
   resource_group_name = "RG_Simplex"
   virtual_network_name = azurerm_virtual_network.my_terraform_network.name
