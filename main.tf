@@ -50,6 +50,20 @@ resource "azurerm_postgresql_server" "example" {
   ssl_enforcement_enabled      = true
 }
 
+resource "azurerm_private_endpoint" "example" {
+  name                = "example-endpoint"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  subnet_id           = azurerm_subnet.example.id
+
+  private_service_connection {
+    name                           = "example-privateserviceconnection"
+    private_connection_resource_id = azurerm_postgresql_server.example.id
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+  }
+}
+
 resource "azurerm_postgresql_database" "example" {
   name                = "exampledb"
   resource_group_name = "RG_Simplex"
@@ -78,6 +92,20 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id     = azurerm_service_plan.example.id
 
   site_config {}
+}
+
+resource "azurerm_private_endpoint" "example" {
+  name                = "example-endpoint"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  subnet_id           = azurerm_subnet.example.id
+
+  private_service_connection {
+    name                           = "example-privateserviceconnection"
+    private_connection_resource_id = azurerm_linux_web_app.example.id
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+  }
 }
 
 data "azurerm_client_config" "current" {}
@@ -110,6 +138,21 @@ resource "azurerm_key_vault" "example" {
     ]
   }
 }
+
+resource "azurerm_private_endpoint" "example" {
+  name                = "example-endpoint"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  subnet_id           = azurerm_subnet.example.id
+
+  private_service_connection {
+    name                           = "example-privateserviceconnection"
+    private_connection_resource_id = azurerm_key_vault.example.id
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+  }
+}
+
 
 resource "azurerm_private_dns_zone" "example" {
   name                = "mydomain2.com"
