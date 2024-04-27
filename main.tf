@@ -162,14 +162,14 @@ resource "azurerm_private_endpoint" "example2" {
   }
 }
 resource "azurerm_private_endpoint" "example3" {
-  name                = "postgresal-server-endpoint-${random_pet.prefix.id}"
+  name                = "psqlflexibleserver-endpoint-${random_pet.prefix.id}"
   location                    = "eastus"
   resource_group_name         = "RG_Simplex"
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
-    name                           = "example-privateserviceconnection-postgresal-server"
-    private_connection_resource_id = azurerm_postgresql_server.example.id
+    name                           = "example-privateserviceconnection-psqlflexibleserver"
+    private_connection_resource_id = azurerm_postgresql_flexible_server.example.id
     subresource_names              = ["postgresqlServer"]
     is_manual_connection           = false
   }
