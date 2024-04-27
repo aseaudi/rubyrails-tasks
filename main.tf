@@ -113,8 +113,8 @@ resource "azurerm_key_vault" "example" {
 
 resource "azurerm_private_endpoint" "example" {
   name                = "example-endpoint"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location                    = "eastus"
+  resource_group_name         = "RG_Simplex"
   subnet_id           = azurerm_subnet.example.id
 
   private_service_connection {
