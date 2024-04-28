@@ -193,6 +193,7 @@ resource "azurerm_private_dns_zone" "example" {
   resource_group_name = "RG_Simplex"
 }
 
+
 resource "azurerm_private_dns_a_record" "example" {
   name                = "test-${random_pet.prefix.id}"
   zone_name           = azurerm_private_dns_zone.example.name
